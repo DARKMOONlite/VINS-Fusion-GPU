@@ -535,6 +535,10 @@ void FeatureTracker::readIntrinsicParameter(const vector<string> &calib_file)
     {
         ROS_INFO("reading paramerter of camera %s", calib_file[i].c_str());
         camodocal::CameraPtr camera = CameraFactory::instance()->generateCameraFromYamlFile(calib_file[i]);
+        if(camera == nullptr){
+            ROS_ERROR("Camera Factory returned nullptr, \n most likely because ' %s ' calibration file is malformed or doesn't exist ",calib_file[i].c_str());
+            ros::requestShutdown();
+        }
         m_camera.push_back(camera);
     }
     if (calib_file.size() == 2)
