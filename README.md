@@ -39,6 +39,7 @@ This is require ROS and OpenCV bridge for OpenCV 4.
 ```
 cd ~/catkin_ws/src
 git clone https://github.com/ros-perception/vision_opencv
+git checkout origin/noetic
 ```
 >[!TIP]
 > If you get errors related to the python version: `nano vision_opencv/cv_bridge/CMakeLists.txt` and change the following line `find_package(Boost REQUIRED python37) -> find_package(Boost REQUIRED python3)`
