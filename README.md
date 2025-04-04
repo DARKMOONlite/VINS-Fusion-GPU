@@ -40,23 +40,19 @@ This is require ROS and OpenCV bridge for OpenCV 4.
 cd ~/catkin_ws/src
 git clone https://github.com/ros-perception/vision_opencv
 ```
+>[!TIP]
+> If you get errors related to the python version: `nano vision_opencv/cv_bridge/CMakeLists.txt` and change the following line `find_package(Boost REQUIRED python37) -> find_package(Boost REQUIRED python3)`
 
-In CMakeLists.txt change python version (if necessary):
+
+>[!TIP]
+> if you get compilation errors then: `nano vision_opencv/cv_bridge/src/module.hpp` and add the following lines
 ```
-nano vision_opencv/cv_bridge/CMakeLists.txt
-```
-```
-find_package(Boost REQUIRED python37) -> find_package(Boost REQUIRED python3)
+#include <numpy/ndarrayobject.h> ``
+ #define NUMPY_IMPORT_ARRAY_RETVAL NULL
 ```
 
-In module.hpp add define NUMPY_IMPORT_ARRAY_RETVAL (if necessary):
-```
-nano vision_opencv/cv_bridge/src/module.hpp
-```
-```cpp
-#include <numpy/ndarrayobject.h>
-#define NUMPY_IMPORT_ARRAY_RETVAL NULL
-```
+
+
 
 Build OpenCV bridge:
 ```
