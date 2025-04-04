@@ -67,7 +67,7 @@ Build is same as [VINS-Fusion-gpu](https://github.com/pjrambo/VINS-Fusion-gpu#2-
 
 #### Dependencies
 ```
-sudo apt-get install ros-melodic-tf ros-melodic-image-transport
+sudo apt-get install ros-noetic-tf ros-noetic-image-transport
 ```
 
 #### Build
