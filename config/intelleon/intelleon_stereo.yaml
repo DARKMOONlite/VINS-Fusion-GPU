@@ -1,0 +1,55 @@
+%YAML:1.0
+---
+#common parameters
+#support: 1 imu 1 cam; 1 imu 2 cam: 2 cam; 
+imu: 0         
+num_of_cam: 2  
+
+imu_topic: "/downward/imu"
+image0_topic: "/downward/color/image_raw"
+image1_topic: "/forward/color/image_raw"
+output_path: "~/output/"
+
+cam0_calib: "downward_pinhole.yaml"
+cam1_calib: "forward_pinhole.yaml"
+image_width: 640
+image_height: 480
+   
+
+# Extrinsic parameter between IMU and Camera.
+estimate_extrinsic: 0   # 0  Have an accurate extrinsic parameters. We will trust the following imu^R_cam, imu^T_cam, don't change it.
+                        # 1  Have an initial guess about extrinsic parameters. We will optimize around your initial guess.
+
+body_T_cam0: !!opencv-matrix # translation from IMU frame to camera frame (rosrun tf tf_echo /imu0 /cam0)
+   rows: 4
+   cols: 4
+   dt: d
+   data: [0.98019, -0.19802, 0.00198, -0.020,
+           0.19802, 0.98019, 0.000198,  0.005,
+           -0.00198, 0.000198, 0.99999, 0.011,
+           0, 0, 0, 1]
+
+body_T_cam1: !!opencv-matrix # translation from IMU frame to camera frame
+   rows: 4
+   cols: 4
+   dt: d
+   data: [-0.99995, 0.00707, 0.00707, 0.009,
+           0.00707, -0.000025, 0.99998, 0.255,
+          0.00707, 0.99997, -0.000025, 0.012,
+          0, 0, 0, 1]
+
+#Multiple thread support
+multiple_thread: 1
+
+#feature traker paprameters
+max_cnt: 150            # max feature number in feature tracking
+min_dist: 30            # min distance between two features 
+freq: 10                # frequence (Hz) of publish tracking result. At least 10Hz for good estimation. If set 0, the frequence will be same as raw image 
+F_threshold: 1.0        # ransac threshold (pixel)
+show_track: 1           # publish tracking image as topic
+flow_back: 1            # perform forward and backward optical flow to improve feature tracking accuracy
+
+#optimization parameters
+max_solver_time: 0.04  # max solver itration time (ms), to guarantee real time
+max_num_iterations: 8   # max solver itrations, to guarantee real time
+keyframe_parallax: 10.0 # keyframe selection threshold (pixel)
