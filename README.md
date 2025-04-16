@@ -1,13 +1,13 @@
 # About
-This is fork from [VINS-Fusion-gpu](https://github.com/pjrambo/VINS-Fusion-gpu) for OpenCV 4 (and some fix).
+This is fork from [VINS-Fusion-gpu](https://github.com/pjrambo/VINS-Fusion-gpu) for OpenCV 4 (including some fixes).
 
 VINS-Fusion-gpu is a version of [VINS-Fusion](https://github.com/HKUST-Aerial-Robotics/VINS-Fusion) with GPU acceleration.
 
 
 # Dependencies
-- [Ceres Solver](http://ceres-solver.org/installation.html)
-- [ROS](http://wiki.ros.org/ROS/Installation)
-- [OpenCV](https://opencv.org)
+- [Ceres Solver](http://ceres-solver.org/installation.html) (**1.14 or 2.0.0**)
+- [ROS](http://wiki.ros.org/ROS/Installation) (**Noetic Preferable**)
+- [OpenCV](https://opencv.org) (**OpenCV 4.x.x**)
 - [OpenCV bridge](https://github.com/ros-perception/vision_opencv)
 
 
@@ -15,7 +15,7 @@ VINS-Fusion-gpu is a version of [VINS-Fusion](https://github.com/HKUST-Aerial-Ro
 
 [Installation](http://ceres-solver.org/installation.html).
 
-[Download](http://ceres-solver.org/ceres-solver-2.0.0.tar.gz) latest stable release. Test it on ceres-solver-1.14 and ceres-solver-2.0.
+[Download](http://ceres-solver.org/ceres-solver-2.0.0.tar.gz) latest stable release. It has been tested on ceres-solver-1.14 and ceres-solver-2.0.
 
 #### Dependencies
 
@@ -56,9 +56,13 @@ git checkout origin/noetic
 
 
 Build OpenCV bridge:
+>[!NOTE]
+> Ensure that you're building with `C++17` or greater.
+>also if building on a device with low available memory (*jetson nano*), try reducing the number of jobs to prevent stalling `-j2`
+
 ```
 cd ~/catkin_ws
-catkin_make
+catkin_make --cmake-args -DCMAKE_CXX_STANDARD=17
 ```
 
 
