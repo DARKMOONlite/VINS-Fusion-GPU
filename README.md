@@ -56,9 +56,12 @@ git checkout origin/noetic
 
 
 Build OpenCV bridge:
+>[!NOTE]
+> Ensure that you're building with a version of C++ > 17
+
 ```
 cd ~/catkin_ws
-catkin_make
+catkin_make --cmake-args -DCMAKE_CXX_STANDARD=17
 ```
 
 
