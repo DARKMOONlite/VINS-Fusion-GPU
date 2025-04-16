@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+
+	
+	<arg name="config_file" default="$(find vins)/../config/intelleon/intelleon_mono_imu.yaml" />
+	<node pkg="vins" type="vins_node" name="vins_node" args="$(arg config_file)" />
+
+</launch>
