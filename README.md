@@ -57,7 +57,8 @@ git checkout origin/noetic
 
 Build OpenCV bridge:
 >[!NOTE]
-> Ensure that you're building with a version of C++ > 17
+> Ensure that you're building with `C++17` or greater.
+>also if building on a device with low available memory (*jetson nano*), try reducing the number of jobs to prevent stalling `-j2`
 
 ```
 cd ~/catkin_ws
